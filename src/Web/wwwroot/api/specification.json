@@ -6,6 +6,48 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/Employees": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "GetAllEmployees",
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedListOfEmployeeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Users/register": {
       "post": {
         "tags": [
@@ -393,6 +435,150 @@
   },
   "components": {
     "schemas": {
+      "PaginatedListOfEmployeeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeDto"
+            }
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EmployeeDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "apellidos": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoDeDocumento": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TipoDeDocumentoDto"
+              }
+            ]
+          },
+          "numeroDeDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaDeContratacion": {
+            "type": "string",
+            "format": "date"
+          },
+          "pais": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CountryDto"
+              }
+            ]
+          },
+          "area": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AreaDto"
+              }
+            ]
+          },
+          "subArea": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SubAreaDto"
+              }
+            ]
+          }
+        }
+      },
+      "TipoDeDocumentoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CountryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AreaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SubAreaDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "HttpValidationProblemDetails": {
         "allOf": [
           {
