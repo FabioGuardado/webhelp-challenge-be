@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using WebhelpChallengeBackend.Domain.Entities;
 
 namespace WebhelpChallengeBackend.Application.Dtos;
-public class TipoDeDocumentoDto
+public class DocumentTypeDto
 {
     public int Id { get; set; }
-    public string? Nombre { get; set; }
+    public string? Name { get; set; }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<TipoDeDocumento, TipoDeDocumentoDto>();
+            CreateMap<DocumentType, DocumentTypeDto>();
         }
     }
 }

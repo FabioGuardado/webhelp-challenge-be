@@ -8,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using WebhelpChallengeBackend.Domain.Entities;
 
 namespace WebhelpChallengeBackend.Infrastructure.Data.Configurations;
-public class TipoDeDocumentoConfiguration : IEntityTypeConfiguration<TipoDeDocumento>
+public class DocumentTypeConfiguration : IEntityTypeConfiguration<DocumentType>
 {
-    public void Configure(EntityTypeBuilder<TipoDeDocumento> builder)
+    public void Configure(EntityTypeBuilder<DocumentType> builder)
     {
-        builder.Property(t => t.Nombre)
+        builder.Property(t => t.Name)
             .IsRequired();
 
         builder.HasData(
-                new TipoDeDocumento { Id = 1, Nombre = "DUI" },
-                new TipoDeDocumento { Id = 2, Nombre = "Pasaporte" }
+                new DocumentType { Id = 1, Name = "DUI" },
+                new DocumentType { Id = 2, Name = "Pasaporte" }
             );
     }
 }

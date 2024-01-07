@@ -27,9 +27,9 @@ public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCo
     {
         if (incomingEmployee != null)
         {
-            return await _context.Empleados
-            .Where(e => e.TipoDeDocumentoId == incomingEmployee.TipoDeDocumentoId)
-            .AllAsync(e => e.NumeroDeDocumento != incomingEmployee.NumeroDeDocumento, cancellationToken);
+            return await _context.Employees
+            .Where(e => e.DocumentTypeId == incomingEmployee.DocumentTypeId)
+            .AllAsync(e => e.DocumentNumber != incomingEmployee.DocumentNumber, cancellationToken);
         }
 
         return false;

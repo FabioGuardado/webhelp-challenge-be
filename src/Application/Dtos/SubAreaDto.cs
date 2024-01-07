@@ -9,7 +9,7 @@ namespace WebhelpChallengeBackend.Application.Dtos;
 public class SubAreaDto
 {
     public int Id { get; set; }
-    public string? Nombre { get; set; }
+    public string? Name { get; set; }
 
     private class Mapping : Profile
     {

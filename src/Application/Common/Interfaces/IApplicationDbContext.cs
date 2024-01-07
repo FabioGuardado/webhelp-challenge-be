@@ -4,12 +4,12 @@ namespace WebhelpChallengeBackend.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<Empleado> Empleados { get; }
+    DbSet<Employee> Employees { get; }
 
-    DbSet<Pais> Paises { get; }
+    DbSet<Country> Countries { get; }
     DbSet<Area> Areas { get; }
     DbSet<SubArea> SubAreas { get; }
-    DbSet<TipoDeDocumento> TiposDeDocumento { get; }
+    DbSet<DocumentType> DocumentTypes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

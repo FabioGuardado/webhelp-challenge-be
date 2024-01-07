@@ -1,5 +1,5 @@
 ﻿namespace WebhelpChallengeBackend.Domain.Entities;
-public class SubArea : BaseEntity
+public class DocumentType : BaseEntity
 {
     public string? Name { get; set; }
 }
