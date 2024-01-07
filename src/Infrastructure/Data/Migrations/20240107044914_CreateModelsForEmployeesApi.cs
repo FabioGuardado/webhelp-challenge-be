@@ -3,14 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateModelsForEmployeesApi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Areas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Areas", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -51,21 +66,42 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TodoLists",
+                name: "Paises",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Colour_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoLists", x => x.Id);
+                    table.PrimaryKey("PK_Paises", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubAreas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubAreas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TiposDeDocumento",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TiposDeDocumento", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,8 +150,8 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -159,8 +195,8 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -175,31 +211,117 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TodoItems",
+                name: "Empleados",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ListId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Priority = table.Column<int>(type: "int", nullable: false),
-                    Reminder = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Done = table.Column<bool>(type: "bit", nullable: false),
-                    Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoDeDocumentoId = table.Column<int>(type: "int", nullable: false),
+                    NumeroDeDocumento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaDeContratacion = table.Column<DateOnly>(type: "date", nullable: false),
+                    PaisId = table.Column<int>(type: "int", nullable: false),
+                    AreaId = table.Column<int>(type: "int", nullable: false),
+                    SubAreaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoItems", x => x.Id);
+                    table.PrimaryKey("PK_Empleados", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TodoItems_TodoLists_ListId",
-                        column: x => x.ListId,
-                        principalTable: "TodoLists",
+                        name: "FK_Empleados_Areas_AreaId",
+                        column: x => x.AreaId,
+                        principalTable: "Areas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Empleados_Paises_PaisId",
+                        column: x => x.PaisId,
+                        principalTable: "Paises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Empleados_SubAreas_SubAreaId",
+                        column: x => x.SubAreaId,
+                        principalTable: "SubAreas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Empleados_TiposDeDocumento_TipoDeDocumentoId",
+                        column: x => x.TipoDeDocumentoId,
+                        principalTable: "TiposDeDocumento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Areas",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Finanzas" },
+                    { 2, "Talento Humano" },
+                    { 3, "Mercadeo" },
+                    { 4, "Operaciones" },
+                    { 5, "Informática" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Paises",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Canadá" },
+                    { 2, "Estados Unidos" },
+                    { 3, "México" },
+                    { 4, "Guatemala" },
+                    { 5, "Belice" },
+                    { 6, "El Salvador" },
+                    { 7, "Honduras" },
+                    { 8, "Nicaragua" },
+                    { 9, "Costa Rica" },
+                    { 10, "Panamá" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubAreas",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Financiamiento" },
+                    { 2, "Auditoría" },
+                    { 3, "Contrataciones" },
+                    { 4, "Capacitación y Desarrollo" },
+                    { 5, "Ventas" },
+                    { 6, "Publicidad" },
+                    { 7, "Gestión de Proveedores" },
+                    { 8, "Inventario" },
+                    { 9, "Planificación" },
+                    { 10, "Soporte Técnico" },
+                    { 11, "Desarrollo de Software y Bases de Datos" },
+                    { 12, "Redes e Infraestructura" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TiposDeDocumento",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "DUI" },
+                    { 2, "Pasaporte" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Empleados",
+                columns: new[] { "Id", "Apellidos", "AreaId", "FechaDeContratacion", "Nombres", "NumeroDeDocumento", "PaisId", "SubAreaId", "TipoDeDocumentoId" },
+                values: new object[,]
+                {
+                    { 1, "Guardado Gil", 5, new DateOnly(2024, 1, 6), "Fabio Ernesto", "062094829", 6, 11, 1 },
+                    { 2, "Grande Chávez", 5, new DateOnly(2024, 1, 6), "Kevin Armando", "062359236", 6, 10, 1 },
+                    { 3, "Vásquez Rodriguez", 4, new DateOnly(2024, 1, 6), "Kimberly Aronet", "123658522", 6, 9, 1 },
+                    { 4, "Serrano López", 1, new DateOnly(2024, 1, 6), "Nelson Alberto", "0623598456", 7, 1, 2 },
+                    { 5, "Reyes Ramos", 1, new DateOnly(2024, 1, 6), "Mónica Alejandra", "555141659", 6, 2, 1 },
+                    { 6, "Nuila Santos", 1, new DateOnly(2024, 1, 6), "Alejandro Andrés", "654658987", 3, 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -242,9 +364,24 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TodoItems_ListId",
-                table: "TodoItems",
-                column: "ListId");
+                name: "IX_Empleados_AreaId",
+                table: "Empleados",
+                column: "AreaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleados_PaisId",
+                table: "Empleados",
+                column: "PaisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleados_SubAreaId",
+                table: "Empleados",
+                column: "SubAreaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Empleados_TipoDeDocumentoId",
+                table: "Empleados",
+                column: "TipoDeDocumentoId");
         }
 
         /// <inheritdoc />
@@ -266,7 +403,7 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TodoItems");
+                name: "Empleados");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -275,7 +412,16 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "TodoLists");
+                name: "Areas");
+
+            migrationBuilder.DropTable(
+                name: "Paises");
+
+            migrationBuilder.DropTable(
+                name: "SubAreas");
+
+            migrationBuilder.DropTable(
+                name: "TiposDeDocumento");
         }
     }
 }
