@@ -2,6 +2,7 @@
 using WebhelpChallengeBackend.Application.Common.Models;
 using WebhelpChallengeBackend.Application.Dtos;
 using WebhelpChallengeBackend.Application.Employees.Commands.CreateEmployee;
+using WebhelpChallengeBackend.Application.Employees.Commands.DeleteEmployee;
 using WebhelpChallengeBackend.Application.Employees.Commands.UpdateEmployee;
 using WebhelpChallengeBackend.Application.Employees.Queries.GetAllEmployees;
 
@@ -14,7 +15,8 @@ public class Employees : EndpointGroupBase
         app.MapGroup(this)
             .MapGet(GetAllEmployees)
             .MapPost(CreateEmployee)
-            .MapPut(UpdateEmployee, "{id}");
+            .MapPut(UpdateEmployee, "{id}")
+            .MapDelete(DeleteEmployee, "{id}");
     }
 
     public async Task<PaginatedList<EmployeeDto>> GetAllEmployees(ISender sender, [AsParameters] GetAllEmployeesQuery query)
@@ -37,6 +39,12 @@ public class Employees : EndpointGroupBase
         command.IncomingEmployee.Id = id;
 
         await sender.Send(command);
+        return Results.NoContent();
+    }
+
+    public async Task<IResult> DeleteEmployee(ISender sender, int id)
+    {
+        await sender.Send(new DeleteEmployeeCommand(id));
         return Results.NoContent();
     }
 
