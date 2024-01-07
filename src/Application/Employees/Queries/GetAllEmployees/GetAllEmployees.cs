@@ -28,11 +28,11 @@ public class GetAllEmployeesQueryHandler : IRequestHandler<GetAllEmployeesQuery,
 
     public async Task<PaginatedList<EmployeeDto>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Empleados
+        return await _context.Employees
             .Include(e => e.Area)
             .Include(e => e.SubArea)
-            .Include(e => e.Pais)
-            .Include(e => e.TipoDeDocumento)
+            .Include(e => e.Country)
+            .Include(e => e.DocumentType)
             .ProjectTo<EmployeeDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }

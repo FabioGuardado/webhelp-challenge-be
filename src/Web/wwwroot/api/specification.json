@@ -556,31 +556,31 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombres": {
+          "firstName": {
             "type": "string",
             "nullable": true
           },
-          "apellidos": {
+          "lastNames": {
             "type": "string",
             "nullable": true
           },
-          "tipoDeDocumento": {
+          "documentType": {
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/TipoDeDocumentoDto"
+                "$ref": "#/components/schemas/DocumentTypeDto"
               }
             ]
           },
-          "numeroDeDocumento": {
+          "documentNumber": {
             "type": "string",
             "nullable": true
           },
-          "fechaDeContratacion": {
+          "hiringDate": {
             "type": "string",
             "format": "date"
           },
-          "pais": {
+          "country": {
             "nullable": true,
             "oneOf": [
               {
@@ -606,7 +606,7 @@
           }
         }
       },
-      "TipoDeDocumentoDto": {
+      "DocumentTypeDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -614,7 +614,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombre": {
+          "name": {
             "type": "string",
             "nullable": true
           }
@@ -628,7 +628,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombre": {
+          "name": {
             "type": "string",
             "nullable": true
           }
@@ -642,7 +642,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombre": {
+          "name": {
             "type": "string",
             "nullable": true
           }
@@ -656,7 +656,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombre": {
+          "name": {
             "type": "string",
             "nullable": true
           }
@@ -684,27 +684,27 @@
             "type": "integer",
             "format": "int32"
           },
-          "nombres": {
+          "firstName": {
             "type": "string",
             "nullable": true
           },
-          "apellidos": {
+          "lastNames": {
             "type": "string",
             "nullable": true
           },
-          "tipoDeDocumentoId": {
+          "documentTypeId": {
             "type": "integer",
             "format": "int32"
           },
-          "numeroDeDocumento": {
+          "documentNumber": {
             "type": "string",
             "nullable": true
           },
-          "fechaDeContratacion": {
+          "hiringDate": {
             "type": "string",
             "format": "date"
           },
-          "paisId": {
+          "countryId": {
             "type": "integer",
             "format": "int32"
           },

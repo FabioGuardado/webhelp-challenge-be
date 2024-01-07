@@ -12,15 +12,15 @@ public class AreaConfiguration : IEntityTypeConfiguration<Area>
 {
     public void Configure(EntityTypeBuilder<Area> builder)
     {
-        builder.Property(a => a.Nombre)
+        builder.Property(a => a.Name)
             .IsRequired();
 
         builder.HasData(
-                    new Area { Id = 1, Nombre = "Finanzas" },
-                    new Area { Id = 2, Nombre = "Talento Humano" },
-                    new Area { Id = 3, Nombre = "Mercadeo" },
-                    new Area { Id = 4, Nombre = "Operaciones" },
-                    new Area { Id = 5, Nombre = "Informática" }
+                    new Area { Id = 1, Name = "Finanzas" },
+                    new Area { Id = 2, Name = "Talento Humano" },
+                    new Area { Id = 3, Name = "Mercadeo" },
+                    new Area { Id = 4, Name = "Operaciones" },
+                    new Area { Id = 5, Name = "Informática" }
                 );
     }
 

@@ -9,13 +9,13 @@ namespace WebhelpChallengeBackend.Application.Dtos;
 public class CountryDto
 {
     public int Id { get; set; }
-    public string? Nombre { get; set; }
+    public string? Name { get; set; }
 
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Pais, CountryDto>();
+            CreateMap<Country, CountryDto>();
         }
     }
 }

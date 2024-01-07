@@ -29,8 +29,8 @@ public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeComman
 
         if (request.incomingEmployee != null)
         {
-            var newEmployee = _mapper.Map<EmployeeCreationDto, Empleado>(request.incomingEmployee);
-            _context.Empleados.Add(newEmployee);
+            var newEmployee = _mapper.Map<EmployeeCreationDto, Employee>(request.incomingEmployee);
+            _context.Employees.Add(newEmployee);
             await _context.SaveChangesAsync(cancellationToken);
         }
 

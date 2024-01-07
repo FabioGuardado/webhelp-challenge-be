@@ -20,10 +20,10 @@ public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeComman
 
     public async Task Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var employeeToDelete = await _context.Empleados.SingleOrDefaultAsync(e => e.Id == request.Id);
+        var employeeToDelete = await _context.Employees.SingleOrDefaultAsync(e => e.Id == request.Id);
         Guard.Against.NotFound(request.Id, employeeToDelete);
 
-        _context.Empleados.Remove(employeeToDelete);
+        _context.Employees.Remove(employeeToDelete);
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

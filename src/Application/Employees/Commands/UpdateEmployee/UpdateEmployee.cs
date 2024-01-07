@@ -32,7 +32,7 @@ public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeComman
             return;
         }
 
-        var employeeToEdit = await _context.Empleados.SingleOrDefaultAsync(e => e.Id == request.IncomingEmployee.Id);
+        var employeeToEdit = await _context.Employees.SingleOrDefaultAsync(e => e.Id == request.IncomingEmployee.Id);
         Guard.Against.NotFound(request.IncomingEmployee.Id, employeeToEdit);
 
         var employeeEdited = _mapper.Map(request.IncomingEmployee, employeeToEdit);

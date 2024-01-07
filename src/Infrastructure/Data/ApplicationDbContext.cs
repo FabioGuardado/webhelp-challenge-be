@@ -11,12 +11,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<Empleado> Empleados => Set<Empleado>();
+    public DbSet<Employee> Employees => Set<Employee>();
 
-    public DbSet<Pais> Paises => Set<Pais>();
+    public DbSet<Country> Countries => Set<Country>();
     public DbSet<Area> Areas => Set<Area>();
     public DbSet<SubArea> SubAreas => Set<SubArea>();
-    public DbSet<TipoDeDocumento> TiposDeDocumento => Set<TipoDeDocumento>();
+    public DbSet<DocumentType> DocumentTypes => Set<DocumentType>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
