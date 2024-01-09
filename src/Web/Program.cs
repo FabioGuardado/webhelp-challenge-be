@@ -8,6 +8,7 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -45,6 +46,12 @@ app.UseExceptionHandler(options => { });
 app.Map("/", () => Results.Redirect("/api"));
 
 app.MapEndpoints();
+
+app.UseCors(options =>
+     options
+     .AllowAnyOrigin()
+     .AllowAnyHeader()
+     .AllowAnyMethod());
 
 app.Run();
 

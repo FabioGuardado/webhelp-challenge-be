@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebhelpChallengeBackend.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using WebhelpChallengeBackend.Infrastructure.Data;
 namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240107230705_StandarizeDBAndAPILanguage")]
+    partial class StandarizeDBAndAPILanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,16 +166,11 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Areas");
 
@@ -180,50 +178,27 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CountryId = 1,
                             Name = "Finanzas"
                         },
                         new
                         {
                             Id = 2,
-                            CountryId = 1,
                             Name = "Talento Humano"
                         },
                         new
                         {
                             Id = 3,
-                            CountryId = 1,
-                            Name = "Informática"
+                            Name = "Mercadeo"
                         },
                         new
                         {
                             Id = 4,
-                            CountryId = 2,
-                            Name = "Finanzas"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CountryId = 2,
-                            Name = "Talento Humano"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CountryId = 2,
                             Name = "Operaciones"
                         },
                         new
                         {
-                            Id = 7,
-                            CountryId = 3,
-                            Name = "Finanzas"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CountryId = 3,
-                            Name = "Mercadeo"
+                            Id = 5,
+                            Name = "Informática"
                         });
                 });
 
@@ -247,17 +222,52 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Guatemala"
+                            Name = "Canadá"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "El Salvador"
+                            Name = "Estados Unidos"
                         },
                         new
                         {
                             Id = 3,
+                            Name = "México"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Guatemala"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Belice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "El Salvador"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Honduras"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Nicaragua"
+                        },
+                        new
+                        {
+                            Id = 9,
                             Name = "Costa Rica"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Panamá"
                         });
                 });
 
@@ -341,72 +351,72 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AreaId = 3,
-                            CountryId = 1,
+                            AreaId = 5,
+                            CountryId = 6,
                             DocumentNumber = "062094829",
-                            DocumentTypeId = 2,
+                            DocumentTypeId = 1,
                             FirstName = "Fabio Ernesto",
-                            HiringDate = new DateOnly(2024, 1, 8),
+                            HiringDate = new DateOnly(2024, 1, 7),
                             LastNames = "Guardado Gil",
-                            SubAreaId = 14
+                            SubAreaId = 11
                         },
                         new
                         {
                             Id = 2,
                             AreaId = 5,
-                            CountryId = 2,
+                            CountryId = 6,
                             DocumentNumber = "062359236",
                             DocumentTypeId = 1,
                             FirstName = "Kevin Armando",
-                            HiringDate = new DateOnly(2024, 1, 8),
+                            HiringDate = new DateOnly(2024, 1, 7),
                             LastNames = "Grande Chávez",
-                            SubAreaId = 7
+                            SubAreaId = 10
                         },
                         new
                         {
                             Id = 3,
                             AreaId = 4,
-                            CountryId = 2,
+                            CountryId = 6,
                             DocumentNumber = "123658522",
                             DocumentTypeId = 1,
                             FirstName = "Kimberly Aronet",
-                            HiringDate = new DateOnly(2024, 1, 8),
+                            HiringDate = new DateOnly(2024, 1, 7),
                             LastNames = "Vásquez Rodriguez",
-                            SubAreaId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AreaId = 8,
-                            CountryId = 3,
-                            DocumentNumber = "0623598456",
-                            DocumentTypeId = 2,
-                            FirstName = "Nelson Alberto",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Serrano López",
                             SubAreaId = 9
                         },
                         new
                         {
+                            Id = 4,
+                            AreaId = 1,
+                            CountryId = 7,
+                            DocumentNumber = "0623598456",
+                            DocumentTypeId = 2,
+                            FirstName = "Nelson Alberto",
+                            HiringDate = new DateOnly(2024, 1, 7),
+                            LastNames = "Serrano López",
+                            SubAreaId = 1
+                        },
+                        new
+                        {
                             Id = 5,
-                            AreaId = 6,
-                            CountryId = 2,
+                            AreaId = 1,
+                            CountryId = 6,
                             DocumentNumber = "555141659",
                             DocumentTypeId = 1,
                             FirstName = "Mónica Alejandra",
-                            HiringDate = new DateOnly(2024, 1, 8),
+                            HiringDate = new DateOnly(2024, 1, 7),
                             LastNames = "Reyes Ramos",
-                            SubAreaId = 13
+                            SubAreaId = 2
                         },
                         new
                         {
                             Id = 6,
                             AreaId = 1,
-                            CountryId = 1,
+                            CountryId = 3,
                             DocumentNumber = "654658987",
                             DocumentTypeId = 2,
                             FirstName = "Alejandro Andrés",
-                            HiringDate = new DateOnly(2024, 1, 8),
+                            HiringDate = new DateOnly(2024, 1, 7),
                             LastNames = "Nuila Santos",
                             SubAreaId = 2
                         });
@@ -420,16 +430,11 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AreaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaId");
 
                     b.ToTable("SubAreas");
 
@@ -437,97 +442,61 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AreaId = 1,
                             Name = "Financiamiento"
                         },
                         new
                         {
                             Id = 2,
-                            AreaId = 1,
                             Name = "Auditoría"
                         },
                         new
                         {
                             Id = 3,
-                            AreaId = 4,
-                            Name = "Financiamiento"
+                            Name = "Contrataciones"
                         },
                         new
                         {
                             Id = 4,
-                            AreaId = 7,
-                            Name = "Auditoría"
+                            Name = "Capacitación y Desarrollo"
                         },
                         new
                         {
                             Id = 5,
-                            AreaId = 2,
-                            Name = "Contrataciones"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AreaId = 2,
-                            Name = "Capacitación y Desarrollo"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AreaId = 5,
-                            Name = "Contrataciones"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AreaId = 5,
-                            Name = "Capacitación y Desarrollo"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AreaId = 8,
                             Name = "Ventas"
                         },
                         new
                         {
-                            Id = 10,
-                            AreaId = 8,
+                            Id = 6,
                             Name = "Publicidad"
                         },
                         new
                         {
-                            Id = 11,
-                            AreaId = 6,
+                            Id = 7,
                             Name = "Gestión de Proveedores"
                         },
                         new
                         {
-                            Id = 12,
-                            AreaId = 6,
+                            Id = 8,
                             Name = "Inventario"
                         },
                         new
                         {
-                            Id = 13,
-                            AreaId = 6,
+                            Id = 9,
                             Name = "Planificación"
                         },
                         new
                         {
-                            Id = 14,
-                            AreaId = 3,
+                            Id = 10,
                             Name = "Soporte Técnico"
                         },
                         new
                         {
-                            Id = 15,
-                            AreaId = 3,
+                            Id = 11,
                             Name = "Desarrollo de Software y Bases de Datos"
                         },
                         new
                         {
-                            Id = 16,
-                            AreaId = 3,
+                            Id = 12,
                             Name = "Redes e Infraestructura"
                         });
                 });
@@ -648,17 +617,6 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Area", b =>
-                {
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Country", "Country")
-                        .WithMany("Areas")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("WebhelpChallengeBackend.Domain.Entities.Area", "Area")
@@ -692,27 +650,6 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                     b.Navigation("DocumentType");
 
                     b.Navigation("SubArea");
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.SubArea", b =>
-                {
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Area", "Area")
-                        .WithMany("SubAreas")
-                        .HasForeignKey("AreaId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Area");
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Area", b =>
-                {
-                    b.Navigation("SubAreas");
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Country", b =>
-                {
-                    b.Navigation("Areas");
                 });
 #pragma warning restore 612, 618
         }

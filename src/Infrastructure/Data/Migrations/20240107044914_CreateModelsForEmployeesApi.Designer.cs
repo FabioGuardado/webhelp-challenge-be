@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebhelpChallengeBackend.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using WebhelpChallengeBackend.Infrastructure.Data;
 namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240107044914_CreateModelsForEmployeesApi")]
+    partial class CreateModelsForEmployeesApi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,16 +166,11 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
 
                     b.ToTable("Areas");
 
@@ -180,54 +178,31 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CountryId = 1,
-                            Name = "Finanzas"
+                            Nombre = "Finanzas"
                         },
                         new
                         {
                             Id = 2,
-                            CountryId = 1,
-                            Name = "Talento Humano"
+                            Nombre = "Talento Humano"
                         },
                         new
                         {
                             Id = 3,
-                            CountryId = 1,
-                            Name = "Informática"
+                            Nombre = "Mercadeo"
                         },
                         new
                         {
                             Id = 4,
-                            CountryId = 2,
-                            Name = "Finanzas"
+                            Nombre = "Operaciones"
                         },
                         new
                         {
                             Id = 5,
-                            CountryId = 2,
-                            Name = "Talento Humano"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CountryId = 2,
-                            Name = "Operaciones"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CountryId = 3,
-                            Name = "Finanzas"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CountryId = 3,
-                            Name = "Mercadeo"
+                            Nombre = "Informática"
                         });
                 });
 
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Country", b =>
+            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Empleado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,180 +210,186 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Apellidos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Guatemala"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "El Salvador"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Costa Rica"
-                        });
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.DocumentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DocumentTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "DUI"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Pasaporte"
-                        });
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AreaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DocumentNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DocumentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("HiringDate")
+                    b.Property<DateOnly>("FechaDeContratacion")
                         .HasColumnType("date");
 
-                    b.Property<string>("LastNames")
+                    b.Property<string>("Nombres")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NumeroDeDocumento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaisId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubAreaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoDeDocumentoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AreaId");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("DocumentTypeId");
+                    b.HasIndex("PaisId");
 
                     b.HasIndex("SubAreaId");
 
-                    b.ToTable("Employees");
+                    b.HasIndex("TipoDeDocumentoId");
+
+                    b.ToTable("Empleados");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AreaId = 3,
-                            CountryId = 1,
-                            DocumentNumber = "062094829",
-                            DocumentTypeId = 2,
-                            FirstName = "Fabio Ernesto",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Guardado Gil",
-                            SubAreaId = 14
+                            Apellidos = "Guardado Gil",
+                            AreaId = 5,
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Fabio Ernesto",
+                            NumeroDeDocumento = "062094829",
+                            PaisId = 6,
+                            SubAreaId = 11,
+                            TipoDeDocumentoId = 1
                         },
                         new
                         {
                             Id = 2,
+                            Apellidos = "Grande Chávez",
                             AreaId = 5,
-                            CountryId = 2,
-                            DocumentNumber = "062359236",
-                            DocumentTypeId = 1,
-                            FirstName = "Kevin Armando",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Grande Chávez",
-                            SubAreaId = 7
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Kevin Armando",
+                            NumeroDeDocumento = "062359236",
+                            PaisId = 6,
+                            SubAreaId = 10,
+                            TipoDeDocumentoId = 1
                         },
                         new
                         {
                             Id = 3,
+                            Apellidos = "Vásquez Rodriguez",
                             AreaId = 4,
-                            CountryId = 2,
-                            DocumentNumber = "123658522",
-                            DocumentTypeId = 1,
-                            FirstName = "Kimberly Aronet",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Vásquez Rodriguez",
-                            SubAreaId = 3
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Kimberly Aronet",
+                            NumeroDeDocumento = "123658522",
+                            PaisId = 6,
+                            SubAreaId = 9,
+                            TipoDeDocumentoId = 1
                         },
                         new
                         {
                             Id = 4,
-                            AreaId = 8,
-                            CountryId = 3,
-                            DocumentNumber = "0623598456",
-                            DocumentTypeId = 2,
-                            FirstName = "Nelson Alberto",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Serrano López",
-                            SubAreaId = 9
+                            Apellidos = "Serrano López",
+                            AreaId = 1,
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Nelson Alberto",
+                            NumeroDeDocumento = "0623598456",
+                            PaisId = 7,
+                            SubAreaId = 1,
+                            TipoDeDocumentoId = 2
                         },
                         new
                         {
                             Id = 5,
-                            AreaId = 6,
-                            CountryId = 2,
-                            DocumentNumber = "555141659",
-                            DocumentTypeId = 1,
-                            FirstName = "Mónica Alejandra",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Reyes Ramos",
-                            SubAreaId = 13
+                            Apellidos = "Reyes Ramos",
+                            AreaId = 1,
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Mónica Alejandra",
+                            NumeroDeDocumento = "555141659",
+                            PaisId = 6,
+                            SubAreaId = 2,
+                            TipoDeDocumentoId = 1
                         },
                         new
                         {
                             Id = 6,
+                            Apellidos = "Nuila Santos",
                             AreaId = 1,
-                            CountryId = 1,
-                            DocumentNumber = "654658987",
-                            DocumentTypeId = 2,
-                            FirstName = "Alejandro Andrés",
-                            HiringDate = new DateOnly(2024, 1, 8),
-                            LastNames = "Nuila Santos",
-                            SubAreaId = 2
+                            FechaDeContratacion = new DateOnly(2024, 1, 6),
+                            Nombres = "Alejandro Andrés",
+                            NumeroDeDocumento = "654658987",
+                            PaisId = 3,
+                            SubAreaId = 2,
+                            TipoDeDocumentoId = 2
+                        });
+                });
+
+            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Pais", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Paises");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "Canadá"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "Estados Unidos"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "México"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nombre = "Guatemala"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nombre = "Belice"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nombre = "El Salvador"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Nombre = "Honduras"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Nombre = "Nicaragua"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Nombre = "Costa Rica"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Nombre = "Panamá"
                         });
                 });
 
@@ -420,16 +401,11 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AreaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaId");
 
                     b.ToTable("SubAreas");
 
@@ -437,98 +413,91 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AreaId = 1,
-                            Name = "Financiamiento"
+                            Nombre = "Financiamiento"
                         },
                         new
                         {
                             Id = 2,
-                            AreaId = 1,
-                            Name = "Auditoría"
+                            Nombre = "Auditoría"
                         },
                         new
                         {
                             Id = 3,
-                            AreaId = 4,
-                            Name = "Financiamiento"
+                            Nombre = "Contrataciones"
                         },
                         new
                         {
                             Id = 4,
-                            AreaId = 7,
-                            Name = "Auditoría"
+                            Nombre = "Capacitación y Desarrollo"
                         },
                         new
                         {
                             Id = 5,
-                            AreaId = 2,
-                            Name = "Contrataciones"
+                            Nombre = "Ventas"
                         },
                         new
                         {
                             Id = 6,
-                            AreaId = 2,
-                            Name = "Capacitación y Desarrollo"
+                            Nombre = "Publicidad"
                         },
                         new
                         {
                             Id = 7,
-                            AreaId = 5,
-                            Name = "Contrataciones"
+                            Nombre = "Gestión de Proveedores"
                         },
                         new
                         {
                             Id = 8,
-                            AreaId = 5,
-                            Name = "Capacitación y Desarrollo"
+                            Nombre = "Inventario"
                         },
                         new
                         {
                             Id = 9,
-                            AreaId = 8,
-                            Name = "Ventas"
+                            Nombre = "Planificación"
                         },
                         new
                         {
                             Id = 10,
-                            AreaId = 8,
-                            Name = "Publicidad"
+                            Nombre = "Soporte Técnico"
                         },
                         new
                         {
                             Id = 11,
-                            AreaId = 6,
-                            Name = "Gestión de Proveedores"
+                            Nombre = "Desarrollo de Software y Bases de Datos"
                         },
                         new
                         {
                             Id = 12,
-                            AreaId = 6,
-                            Name = "Inventario"
+                            Nombre = "Redes e Infraestructura"
+                        });
+                });
+
+            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.TipoDeDocumento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposDeDocumento");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "DUI"
                         },
                         new
                         {
-                            Id = 13,
-                            AreaId = 6,
-                            Name = "Planificación"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AreaId = 3,
-                            Name = "Soporte Técnico"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AreaId = 3,
-                            Name = "Desarrollo de Software y Bases de Datos"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AreaId = 3,
-                            Name = "Redes e Infraestructura"
+                            Id = 2,
+                            Nombre = "Pasaporte"
                         });
                 });
 
@@ -648,18 +617,7 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Area", b =>
-                {
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Country", "Country")
-                        .WithMany("Areas")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Employee", b =>
+            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Empleado", b =>
                 {
                     b.HasOne("WebhelpChallengeBackend.Domain.Entities.Area", "Area")
                         .WithMany()
@@ -667,15 +625,9 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Country", "Country")
+                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Pais", "Pais")
                         .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.DocumentType", "DocumentType")
-                        .WithMany()
-                        .HasForeignKey("DocumentTypeId")
+                        .HasForeignKey("PaisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -685,34 +637,19 @@ namespace WebhelpChallengeBackend.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Area");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("DocumentType");
-
-                    b.Navigation("SubArea");
-                });
-
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.SubArea", b =>
-                {
-                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.Area", "Area")
-                        .WithMany("SubAreas")
-                        .HasForeignKey("AreaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("WebhelpChallengeBackend.Domain.Entities.TipoDeDocumento", "TipoDeDocumento")
+                        .WithMany()
+                        .HasForeignKey("TipoDeDocumentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Area");
-                });
 
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Area", b =>
-                {
-                    b.Navigation("SubAreas");
-                });
+                    b.Navigation("Pais");
 
-            modelBuilder.Entity("WebhelpChallengeBackend.Domain.Entities.Country", b =>
-                {
-                    b.Navigation("Areas");
+                    b.Navigation("SubArea");
+
+                    b.Navigation("TipoDeDocumento");
                 });
 #pragma warning restore 612, 618
         }
